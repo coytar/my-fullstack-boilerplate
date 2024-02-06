@@ -1,0 +1,27 @@
+version: "3.4"
+services:
+  mongodb:
+    container_name: template1db
+    image: mongodb/mongodb-community-server
+    ports:
+      - "27017:27017"
+
+  server:
+    container_name: template1be
+    build: 
+      context: ./server
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongodb
+
+  client:
+    container_name: template1fe
+    build:
+      context: ./client
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - "5173:3000"
+    depends_on:
+      - server
