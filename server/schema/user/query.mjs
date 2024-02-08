@@ -1,4 +1,4 @@
-import { UserModel } from "./db.js";
+import { UserModel } from "./db.mjs";
 
 // Queries
 export const UserQuery = {

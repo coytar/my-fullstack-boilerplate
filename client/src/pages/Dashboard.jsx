@@ -13,6 +13,7 @@ import { call } from "ramda";
 function Dashboard() {
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [data, setData] = useState("");
   let user = "";
 
   // if (localStorage.getItem("user"))
@@ -37,9 +38,12 @@ function Dashboard() {
     };
 
     axios(authOptions)
-    // axios.get('/api/stuff')
-    .then((response) => {
-        console.log(response.data);
+      // axios.get('/api/stuff')
+      .then((response) => {
+        if (response.data) {
+          console.log(response.data);
+          setData(response.data.message);
+        }
       })
       .catch((err) => {
         // console.log(err);
@@ -94,7 +98,10 @@ function Dashboard() {
 
             {/* Cards */}
             <div className="grid grid-cols-12 gap-6">
-              Hello {user.firstName}
+              {/* Hello! {user.firstName} */}
+              Hello!
+              <br />
+              {data}
             </div>
           </div>
         </main>
