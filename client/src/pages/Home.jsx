@@ -59,7 +59,7 @@ function Home() {
 
             <div className="max-w-sm mx-auto w-full px-4 py-8">
               <h1 className="text-3xl text-slate-800 dark:text-slate-100 font-bold">
-              Todo App Example         
+              {process.env.REACT_APP_TITLE}         
               </h1>
               ({process.env.NODE_ENV} version)
               <br />

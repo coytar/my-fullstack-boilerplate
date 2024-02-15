@@ -13,12 +13,15 @@ export const UserTypes = gql`
     completed: Boolean
     username: String!
     password: String!
+    email: String!
     profilePic: String
     firstName: String
     lastName: String
     bio: String
     createdAt: Int
     updatedAt: Int
+    role: String
+    organisation: String
   }
 
   type Query {

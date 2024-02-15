@@ -1,10 +1,19 @@
 import { Router } from "express";
 import passport from "passport";
 import { UserModel } from "../schema/user/db.mjs";
+import jwt from "jsonwebtoken";
 
 const router = Router();
 
 export default router;
+
+const createToken = (user) => {
+  return jwt.sign(
+    { id: user._id, organisation: user.organisation, role: user.role },
+    process.env.JWT_SECRET,
+    { expiresIn: "3d" }
+  );
+};
 
 router.post("/register", (req, res) => {
   if (!req || !req.body || !req.body.username || !req.body.password) {
@@ -13,6 +22,8 @@ router.post("/register", (req, res) => {
 
   req.body.usernameCase = req.body.username;
   req.body.username = req.body.username.toLowerCase();
+  req.body.email = req.body.username;
+  req.body.role = 'admin';
 
   const { username } = req.body;
   const newUser = UserModel(req.body);
@@ -21,13 +32,19 @@ router.post("/register", (req, res) => {
     .then((users) => {
       if (users[0]) {
         res.status(400).send({ message: "Username exists" });
+        return;
       }
 
       newUser.hashPassword().then(() => {
         newUser
           .save()
           .then((user) => {
-            res.send({ message: "User created successfully", user });
+            const token = createToken(user);
+            res.json({
+              message: "User created successfully",
+              user: user.username,
+              token,
+            });
           })
           .catch((err) => {
             res.status(400).send({ message: "Create user failed", err });
@@ -54,7 +71,12 @@ router.post("/login", (req, res, next) => {
       if (err) {
         res.status(401).send({ message: "Login failed", err });
       }
-      res.send({ message: "Logged in successfully", user });
+      const token = createToken(user);
+      res.json({
+        message: "User logged in successfully",
+        user: user.username,
+        token,
+      });
     });
   })(req, res, next);
 });

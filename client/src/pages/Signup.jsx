@@ -101,16 +101,19 @@ function Signup() {
       };
 
       await signup(firstName, lastName, username, password);
-      setTimeout(() => {
-        navigate("/dashboard");
-      }, 2000);
-      return;
       // setLoading(true);
       // dispatch(attemptRegister(newUser))
       //   .catch(R.identity)
       //   .finally(() => setLoading(false));
     }
   };
+
+  if (success) {
+    setTimeout(() => {
+      navigate("/dashboard");
+    }, 2000);
+    return;
+  }
 
   return (
     <main className="bg-white dark:bg-slate-900">

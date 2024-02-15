@@ -16,12 +16,8 @@ const useLogin = () => {
     var authOptions = {
       method: "post",
       url: `${process.env.REACT_APP_BACKEND}/api/auth/login`,
-      // url: `/api/auth/login`,
       data: userCredentials,
       headers: {
-        // "Access-Control-Allow-Origin": "https://template1.endratek.com",
-        // "Access-Control-Allow-Methods": "PUT, GET, POST, DELETE, OPTIONS",
-        // "Access-Control-Allow-Headers": "Access-Control-Allow-Headers,Access-Control-Allow-Origin,Access-Control-Allow-Methods,Content-Type",
         "Content-Type": "application/json",
       },
       json: true,
@@ -31,6 +27,7 @@ const useLogin = () => {
       .then((response) => {
         setSuccess(response.data.message);
         localStorage.setItem("user", JSON.stringify(response.data.user));
+        localStorage.setItem("token", JSON.stringify(response.data.token));
         // dispatch({
         //   type: "LOGIN",
         //   payload: response.data.user,

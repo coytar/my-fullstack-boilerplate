@@ -46,6 +46,7 @@ function Tasks() {
     addTask({ variables: { desc: description } })
       .then((value) => {
         console.log(value);
+        navigate(0);
       })
       .catch((reason) => {
         console.log(reason);

@@ -1,6 +1,5 @@
 import { Strategy as LocalStrategy } from "passport-local";
-import { UserModel } from '../schema/user/db.mjs';
-import bcrypt from "bcryptjs";
+import { UserModel } from "../schema/user/db.mjs";
 
 export const StrategyLocal = new LocalStrategy((username, password, done) => {
   UserModel.findOne({ username })

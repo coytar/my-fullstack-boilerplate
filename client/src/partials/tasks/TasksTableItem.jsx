@@ -66,7 +66,7 @@ function TasksTableItem(props) {
                 alt={props.id}
               />
             </div>
-            <div className="font-medium text-sky-500">{props.id}</div>
+            {/* <div className="font-medium text-sky-500">{props.id}</div> */}
           </button>
         </td>
         <td className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">

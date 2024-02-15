@@ -11,6 +11,7 @@ export const TaskTypes = gql`
     _id: String
     description: String!
     completed: Boolean
+    organisation: String
   }
 
   type Query {

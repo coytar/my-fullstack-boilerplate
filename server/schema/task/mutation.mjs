@@ -1,11 +1,16 @@
 import { TaskModel } from "./db.mjs";
+import jwt from "jsonwebtoken";
 
 // Mutations
 export const TaskMutation = {
   addTask: async (parent, args, contextValue, info) => {
+    const { token } = contextValue;
+    const user = jwt.verify(token, process.env.JWT_SECRET);
+
     const task = new TaskModel({
       description: args.description,
       completed: false,
+      organisation: user.organisation,
     });
     return await task.save();
   },

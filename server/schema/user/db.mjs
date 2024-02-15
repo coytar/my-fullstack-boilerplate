@@ -1,6 +1,7 @@
 import { connect, Schema, model } from "mongoose";
 import bcrypt from "bcryptjs";
 import { AutoIncrementID } from "@typegoose/auto-increment";
+import * as uuid from "uuid";
 
 connect(process.env.DATABASE_URL);
 
@@ -15,12 +16,21 @@ const userSchema = new Schema(
       immutable: true,
     },
     password: { type: String, required: true },
+    email: { type: String, required: true },
     profilePic: { type: String },
     firstName: { type: String, maxlength: 20 },
     lastName: { type: String, maxlength: 20 },
     bio: { type: String, maxlength: 240 },
     createdAt: { type: Date, default: Date.now, immutable: true },
     updatedAt: { type: Date },
+    role: { type: String },
+    organisation: {
+      type: String,
+      default: function () {
+        // Return a UUID as a hex string
+        return uuid.v4().replace(/-/g, "");
+      },
+    },
   },
   { versionKey: false }
 );
@@ -32,14 +42,6 @@ userSchema.set("toJSON", {
     delete ret.__v;
     delete ret.password;
   },
-});
-
-userSchema.plugin(AutoIncrementID, {
-  field: "user",
-  incrementBy: 1,
-  startAt: 1,
-  trackerCollection: "counters",
-  trackerModelName: "User",
 });
 
 userSchema.virtual("fullName").get(function () {

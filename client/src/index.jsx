@@ -7,6 +7,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { AuthContextProvider } from "./context/AuthContext";
 import { ReactNotifications } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
+import apiClient from "./graphql/apiClient";
 
 if (process.env.NODE_ENV == "development") {
   // import("http-proxy-middleware").then((mod) => {
@@ -16,17 +17,17 @@ if (process.env.NODE_ENV == "development") {
   // });
 }
 
-const client = new ApolloClient({
-  uri: `${process.env.REACT_APP_BACKEND}/graphql`, // Your GraphQL server endpoint
-  cache: new InMemoryCache(),
-});
+// const client = new ApolloClient({
+//   uri: `${process.env.REACT_APP_BACKEND}/graphql`, // Your GraphQL server endpoint
+//   cache: new InMemoryCache(),
+// });
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThemeProvider>
       <AuthContextProvider>
         <Router>
-          <ApolloProvider client={client}>
+          <ApolloProvider client={apiClient}>
             <ReactNotifications />
             <App />
           </ApolloProvider>

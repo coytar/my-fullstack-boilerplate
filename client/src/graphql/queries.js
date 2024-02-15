@@ -6,7 +6,8 @@ export const LIST_TASKS = gql`
       data {
         _id
         completed
-        description      
+        description
+        organisation
       }
       count
       nextPage
@@ -20,6 +21,7 @@ export const GET_TASK = gql`
       _id
       description
       completed
+      organisation
     }
   }
 `;

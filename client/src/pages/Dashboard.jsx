@@ -14,31 +14,23 @@ function Dashboard() {
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [data, setData] = useState("");
-  let user = "";
+  let token = "";
 
-  // if (localStorage.getItem("user"))
-  //   user = JSON.parse(localStorage.getItem("user"));
+  if (localStorage.getItem("token"))
+    token = JSON.parse(localStorage.getItem("token"));
 
   const callQuery = () => {
     var authOptions = {
       method: "get",
       url: `${process.env.REACT_APP_BACKEND}/api/dashboard`,
-      // url: `/api/dashboard`,
-      // headers: {
-      //   // "Access-Control-Allow-Origin": "https://template1.endratek.com",
-      //   // "Access-Control-Allow-Methods": "PUT, GET, POST, DELETE, OPTIONS",
-      //   // "Access-Control-Allow-Headers": "Access-Control-Allow-Headers,Access-Control-Allow-Origin,Access-Control-Allow-Methods,Content-Type",
-      //   "Content-Type": "application/json",
-      // },
-      // json: true,
-      // withCredentials: true,
-      // data: {
-      //   user
-      // }
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": token
+      },
+      json: true,
     };
 
     axios(authOptions)
-      // axios.get('/api/stuff')
       .then((response) => {
         if (response.data) {
           console.log(response.data);

@@ -5,11 +5,9 @@ import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHt
 import express from "express";
 import bodyParser from "body-parser";
 import http from "http";
-import cors from "cors";
 import { typeDefs, resolvers } from "./schema/index.js";
 import { configPassport } from "./passport/config.js";
 import routes from "./routes/index.js";
-import { requireAuth } from "./routes/middleware.js";
 import { GraphQLError } from "graphql";
 import { ApolloServerPluginLandingPageDisabled } from "@apollo/server/plugin/disabled";
 import {
@@ -18,27 +16,6 @@ import {
 } from "@apollo/server/plugin/landingPage/default";
 
 const app = express();
-
-// if (process.env.NODE_ENV == "development") {
-//   console.log("Enabling CORS");
-//   const whitelist = [
-//     "http://localhost:3000",
-//     "http://localhost:3001",
-//     "http://192.168.99.3:3000",
-//     "https://template1.endratek.com",
-//   ];
-//   const corsOptions = {
-//     credentials: true, // This is important.
-//     origin: (origin, callback) => {
-//       console.log("Requesting from", origin);
-//       if (whitelist.includes(origin)) return callback(null, true);
-
-//       callback(new Error("Not allowed by CORS"));
-//     },
-//   };
-//   app.use(cors(corsOptions));
-//   // app.use(cors());
-// }
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -82,7 +59,9 @@ app.use(
   "/graphql",
   express.json(),
   expressMiddleware(server, {
-    context: async ({ req }) => ({ token: req.headers.token }),
+    context: async ({ req }) => {
+      return { token: req.headers.authorization };
+    },
     // context: async ({ req }) => {
     //   if (!req.user)
     //     // throwing a `GraphQLError` here allows us to specify an HTTP status code,

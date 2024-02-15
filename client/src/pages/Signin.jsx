@@ -31,46 +31,6 @@ function Signin() {
 
   const signin = async () => {
     await login(username, password);
-    // const userCredentials = { username, password };
-    // var authOptions = {
-    //   method: "post",
-    //   url: "http://localhost:3001/api/auth/signin",
-    //   data: userCredentials,
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   json: true,
-    // };
-
-    // axios(authOptions)
-    //   // axios
-    //   //   .post("http://localhost:3001/api/auth/register", { username, password })
-    //   .then((data) => {
-    //     console.log(data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
-    // RNC.addNotification({
-    //   title: "Success!",
-    //   message: "Signing in",
-    //   type: "success",
-    //   container: "bottom-left",
-    //   animationIn: ["animated", "fadeInRight"],
-    //   animationOut: ["animated", "fadeOutRight"],
-    //   dismiss: {
-    //     duration: 1000,
-    //   },
-    //   onRemoval: () => navigate("/dashboard"),
-    // });
-
-    // navigate("/dashboard");
-    return;
-    // setLoading(true);
-    // dispatch(attemptLogin(userCredentials))
-    //   .catch(R.identity)
-    //   .finally(() => setLoading(false));
   };
 
   if (success) {

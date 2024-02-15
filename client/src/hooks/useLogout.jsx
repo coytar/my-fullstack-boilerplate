@@ -15,12 +15,8 @@ const useLogout = () => {
     var authOptions = {
       method: "post",
       url: `${process.env.REACT_APP_BACKEND}/api/auth/logout`,
-      // url: `/api/auth/logout`,
       data: {},
       headers: {
-        // "Access-Control-Allow-Origin": "https://template1.endratek.com",
-        // "Access-Control-Allow-Methods": "PUT, GET, POST, DELETE, OPTIONS",
-        // "Access-Control-Allow-Headers": "Access-Control-Allow-Headers,Access-Control-Allow-Origin,Access-Control-Allow-Methods,Content-Type",
         "Content-Type": "application/json",
       },
       json: true,
@@ -31,6 +27,7 @@ const useLogout = () => {
         setSuccess(response.data.message);
         //remove user from localstorage
         localStorage.removeItem("user");
+        localStorage.removeItem("token");
         // dispatch({ type: "LOGOUT", payload: null });
         setIsLoading(false);
       })

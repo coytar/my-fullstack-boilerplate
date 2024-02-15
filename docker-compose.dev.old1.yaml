@@ -3,12 +3,8 @@ services:
   mongodb:
     container_name: template1db
     image: mongodb/mongodb-community-server
-    volumes: 
-      - database:/data/db
     ports:
       - "27017:27017"
-    networks:
-      - bridgenet
 
   server:
     container_name: template1be
@@ -17,8 +13,6 @@ services:
       dockerfile: ./Dockerfile.dev
     ports:
       - "3001:3001"
-    networks:
-      - bridgenet
     depends_on:
       - mongodb
 
@@ -29,15 +23,5 @@ services:
       dockerfile: ./Dockerfile.dev
     ports:
       - "5173:3000"
-    networks:
-      - bridgenet
     depends_on:
       - server
-
-volumes:
-  database:
-
-networks:
-  bridgenet:
-    name: template1net
-    driver: bridge  

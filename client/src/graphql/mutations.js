@@ -6,6 +6,7 @@ export const ADD_TASK = gql`
       _id
       description
       completed
+      organisation
     }
   }
 `;
