@@ -5,7 +5,7 @@ import * as uuid from "uuid";
 
 connect(process.env.DATABASE_URL);
 
-const userSchema = new Schema(
+const schema = new Schema(
   {
     user: Number,
     username: {
@@ -35,7 +35,7 @@ const userSchema = new Schema(
   { versionKey: false }
 );
 
-userSchema.set("toJSON", {
+schema.set("toJSON", {
   transform: (doc, ret) => {
     ret.id = ret._id;
     delete ret._id;
@@ -44,7 +44,7 @@ userSchema.set("toJSON", {
   },
 });
 
-userSchema.virtual("fullName").get(function () {
+schema.virtual("fullName").get(function () {
   if (this.firstName && this.lastName) {
     return `${this.firstName} ${this.lastName}`;
   }
@@ -57,7 +57,7 @@ userSchema.virtual("fullName").get(function () {
   return undefined;
 });
 
-userSchema.virtual("initials").get(function () {
+schema.virtual("initials").get(function () {
   return (
     this.firstName &&
     this.lastName &&
@@ -65,11 +65,11 @@ userSchema.virtual("initials").get(function () {
   );
 });
 
-userSchema.methods.validPassword = function (password) {
+schema.methods.validPassword = function (password) {
   return bcrypt.compareSync(password, this.password);
 };
 
-userSchema.methods.hashPassword = function () {
+schema.methods.hashPassword = function () {
   return new Promise((resolve, reject) => {
     bcrypt.genSalt(10, (err1, salt) => {
       if (err1) {
@@ -86,4 +86,4 @@ userSchema.methods.hashPassword = function () {
   });
 };
 
-export const UserModel = model("user", userSchema, "user");
+export const UserModel = model("user", schema, "user");
