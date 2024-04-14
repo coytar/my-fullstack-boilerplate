@@ -70,10 +70,10 @@ function TasksTableItem(props) {
           </button>
         </td>
         <td className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-          <div>{props.description}</div>
+          <div>{props.item.description}</div>
         </td>
         <td className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-          <div>{props.completed ? "Yes" : "No"}</div>
+          <div>{props.item.completed ? "Yes" : "No"}</div>
         </td>
         <td className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
           <div className="flex items-center">
@@ -108,7 +108,7 @@ function TasksTableItem(props) {
             <svg className="w-4 h-4 shrink-0 fill-current text-slate-400 dark:text-slate-500 mr-2">
               <path d="M1 16h3c.3 0 .5-.1.7-.3l11-11c.4-.4.4-1 0-1.4l-3-3c-.4-.4-1-.4-1.4 0l-11 11c-.2.2-.3.4-.3.7v3c0 .6.4 1 1 1zm1-3.6l10-10L13.6 4l-10 10H2v-1.6z" />
             </svg>
-            <div className="italic">{props.description}</div>
+            <div className="italic">{props.item.description}</div>
           </div>
         </td>
       </tr>

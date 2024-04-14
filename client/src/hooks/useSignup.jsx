@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useAuthContext from "./useAuthContext";
 import axios from "axios";
+import bcrypt from "bcryptjs";
 
 const useSignup = () => {
   const [error, setError] = useState(null);
@@ -13,7 +14,6 @@ const useSignup = () => {
     setError(null);
 
     const userCredentials = { firstName, lastName, username, password };
-
     var authOptions = {
       method: "post",
       url: `${process.env.REACT_APP_BACKEND}/api/auth/register`,

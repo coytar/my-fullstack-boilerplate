@@ -5,9 +5,9 @@ import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHt
 import express from "express";
 import bodyParser from "body-parser";
 import http from "http";
-import { typeDefs, resolvers } from "./schema/index.js";
-import { configPassport } from "./passport/config.js";
-import routes from "./routes/index.js";
+import { typeDefs, resolvers } from "./src/schema/index.js";
+import { configPassport } from "./src/passport/config.js";
+import routes from "./src/routes/index.js";
 import { GraphQLError } from "graphql";
 import { ApolloServerPluginLandingPageDisabled } from "@apollo/server/plugin/disabled";
 import {

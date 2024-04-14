@@ -89,8 +89,7 @@ function TasksTable({
                     key={item._id}
                     id={item._id}
                     image={Image02}
-                    description={item.description}
-                    completed={item.completed}
+                    item={item}
                     handleClick={handleClick}
                     handleItemClick={() => handleItemClick(item._id)}
                     isChecked={isCheck.includes(item._id)}
