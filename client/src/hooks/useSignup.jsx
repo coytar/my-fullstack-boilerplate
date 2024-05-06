@@ -1,7 +1,6 @@
 import { useState } from "react";
 import useAuthContext from "./useAuthContext";
 import axios from "axios";
-import bcrypt from "bcryptjs";
 
 const useSignup = () => {
   const [error, setError] = useState(null);
